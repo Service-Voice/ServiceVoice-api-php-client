@@ -1,0 +1,12 @@
+{
+  "name": "Service-Voice/ServiceVoice-api-php-client",
+  "description": "API клиент для service-voice API",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Artem Ivanko",
+      "email": "a_ivanko@service-voice.com"
+    }
+  ]
+}
