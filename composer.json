@@ -8,5 +8,13 @@
       "name": "Artem Ivanko",
       "email": "a_ivanko@service-voice.com"
     }
-  ]
+  ],
+  "autoload": {
+    "psr-4": {
+      "ServiceVoice\\ApiSdk\\": "src/"
+    }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "6.3.0"
+  }
 }
