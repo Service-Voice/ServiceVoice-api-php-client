@@ -2,6 +2,7 @@
   "name": "Service-Voice/ServiceVoice-api-php-client",
   "description": "API клиент для service-voice API",
   "license": "proprietary",
+  "version": "0.1.0",
   "authors": [
     {
       "name": "Artem",
