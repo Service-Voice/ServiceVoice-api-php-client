@@ -1,8 +1,9 @@
 {
   "name": "Service-Voice/ServiceVoice-api-php-client",
   "description": "API клиент для service-voice API",
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "license": "proprietary",
+  "version": "dev-master",
   "authors": [
     {
       "name": "Artem Ivanko",
