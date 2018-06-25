@@ -1,5 +1,5 @@
 {
-  "name": "Service-Voice/ServiceVoice-api-php-client",
+  "name": "service-voice/service-voice-api-php-client",
   "description": "API клиент для service-voice API",
   "license": "proprietary",
   "version": "0.1.0",
