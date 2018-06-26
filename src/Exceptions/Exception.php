@@ -16,15 +16,17 @@ class Exception extends \Exception {
 	 */
 	protected $response;
 
+	protected $data;
 	/**
 	 * Build a new exception
 	 *
 	 * @param ResponseInterface $response
 	 */
 	public function __construct( $response ) {
-		$data = json_decode( $response->getBody(), true );
-		parent::__construct( $data['message'], $response->getStatusCode() );
+		$data = json_decode( $response->getBody()->getContents(), true );
+		parent::__construct( $data['error']['message'], $response->getStatusCode() );
 		$this->response = $response;
+		$this->data     = $data;
 	}
 
 	/**
@@ -32,5 +34,9 @@ class Exception extends \Exception {
 	 */
 	public function getResponse() {
 		return $this->response;
+	}
+
+	public function getData() {
+		return $this->data;
 	}
 }
