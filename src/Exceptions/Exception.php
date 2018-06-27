@@ -17,14 +17,22 @@ class Exception extends \Exception {
 	protected $response;
 
 	protected $data;
+
 	/**
 	 * Build a new exception
 	 *
 	 * @param ResponseInterface $response
 	 */
 	public function __construct( $response ) {
-		$data = json_decode( $response->getBody()->getContents(), true );
-		parent::__construct( $data['error']['message'], $response->getStatusCode() );
+		$data        = json_decode( $response->getBody()->getContents(), true );
+		$message     = $data['error']['message'];
+		$description = '';
+
+		if ( array_key_exists( 'description', $data['error'] ) ) {
+			$description = implode( PHP_EOL, $data['error']['description'] );
+		}
+
+		parent::__construct( $message . PHP_EOL . ' ' . $description, $response->getStatusCode() );
 		$this->response = $response;
 		$this->data     = $data;
 	}

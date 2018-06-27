@@ -9,7 +9,7 @@
 namespace ServiceVoice\ApiSdk\Transport;
 
 use GuzzleHttp\Client as Guzzle;
-use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\BadResponseException;
 use ServiceVoice\ApiSdk\Config;
 use ServiceVoice\ApiSdk\Exceptions\RequestException;
 use ServiceVoice\ApiSdk\Exceptions\ResponseException;
@@ -19,6 +19,7 @@ class Http {
 	private $metod;
 	private $headers;
 	private $path;
+	private $body = null;
 
 	function __construct() {
 		$this->http = new Guzzle( [ 'base_uri' => Config::getBaseUrl() ] );
@@ -32,10 +33,36 @@ class Http {
 		$this->headers[ $key ] = $value;
 	}
 
+	public function SetBody( $body ) {
+		$this->body = $body;
+	}
+
+	public function GetBody() {
+		return $this->body;
+	}
+
+	public function isBody() {
+		if ( ! empty( $this->body ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public function SendRequest() {
 		try {
-			$response = $this->http->request( $this->GetMetod(), $this->GetPath(), [ 'headers' => $this->GetHeaders() ] );
-		} catch ( ClientException $e ) {
+			if ( ! $this->isBody() ) {
+				$response = $this->http->request( $this->GetMetod(), $this->GetPath(), [
+					'headers' => $this->GetHeaders()
+				] );
+			} else {
+				$response = $this->http->request( $this->GetMetod(), $this->GetPath(), [
+					'headers' => $this->GetHeaders(),
+					'body'    => $this->GetBody(),
+				] );
+
+			}
+		} catch ( BadResponseException $e ) {
 			throw new RequestException( $e->getResponse() );
 		}
 		$data = json_decode( $response->getBody() );

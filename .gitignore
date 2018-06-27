@@ -10,3 +10,4 @@ composer.phar
 .idea/modules.xml
 .idea/php.xml
 .idea/workspace.xml
+.idea/vcs.xml

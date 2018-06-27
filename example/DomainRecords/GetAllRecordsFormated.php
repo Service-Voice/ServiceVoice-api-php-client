@@ -11,6 +11,7 @@ include __DIR__ . '/../../vendor/autoload.php';
 use ServiceVoice\ApiSdk\Client as ServiceVoiceAPI;
 
 $ServiceVoiceAPI = new ServiceVoiceAPI( 'ТОКЕН' );
-$result          = $ServiceVoiceAPI->DomainRecords( 'service-voice.com' )->List();
+$result          = $ServiceVoiceAPI->DomainRecords( 'service-voice.com' )->ListFormated();
 
 print_r( $result );
+

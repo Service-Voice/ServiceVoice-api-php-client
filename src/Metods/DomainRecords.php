@@ -9,6 +9,7 @@
 namespace ServiceVoice\ApiSdk\Metods;
 
 use ServiceVoice\ApiSdk\Config;
+use ServiceVoice\ApiSdk\Models\Domain\Record;
 use ServiceVoice\ApiSdk\Transport\Http;
 
 /**
@@ -52,4 +53,37 @@ class DomainRecords {
 		return $this->http->SendRequest();
 	}
 
+	/**
+	 * @param Record $record
+	 *
+	 * @return mixed
+	 * @throws \ServiceVoice\ApiSdk\Exceptions\RequestException
+	 * @throws \ServiceVoice\ApiSdk\Exceptions\ResponseException
+	 */
+	function add( Record $record ) {
+		$this->http->SetMetod( 'post' );
+		$this->http->SetPath( 'domain/' . $this->domain . '/record' );
+		$this->http->AddHeader( 'X-token', Config::getApiToken() );
+		$this->http->AddHeader( 'Content-Type', 'application/json' );
+		$this->http->SetBody( json_encode( $record->serialize() ) );
+
+		return $this->http->SendRequest();
+	}
+
+	/**
+	 * @param Record $record
+	 *
+	 * @return mixed
+	 * @throws \ServiceVoice\ApiSdk\Exceptions\RequestException
+	 * @throws \ServiceVoice\ApiSdk\Exceptions\ResponseException
+	 */
+	function remove( Record $record ) {
+		$this->http->SetMetod( 'delete' );
+		$this->http->SetPath( 'domain/' . $this->domain . '/record' );
+		$this->http->AddHeader( 'X-token', Config::getApiToken() );
+		$this->http->AddHeader( 'Content-Type', 'application/json' );
+		$this->http->SetBody( json_encode( $record->serialize() ) );
+
+		return $this->http->SendRequest();
+	}
 }
